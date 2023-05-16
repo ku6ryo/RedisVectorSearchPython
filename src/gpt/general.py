@@ -8,8 +8,8 @@ gpt_model = "gpt-3.5-turbo"
 
 def get_embedding(text: str):
     res = openai.Embedding.create(input=text, model=embedding_model)
-    embeddings = res['data'][0]['embedding']
-    return embeddings
+    embedding = res['data'][0]['embedding']
+    return embedding
 
 
 def chat_completion(messages: list):
