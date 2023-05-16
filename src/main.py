@@ -69,4 +69,5 @@ redis_query = Query(base_query).return_fields(*return_fields).sort_by("vector_sc
 results = client.ft(index_name).search(redis_query, params_dict)
 
 for d in results.docs:
+    print(d.id)
     print(d.content, d.vector_score)
