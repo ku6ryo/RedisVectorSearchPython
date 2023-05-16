@@ -33,7 +33,7 @@ print("INDEX: ", index_name)
 # Create Index
 client.ft(index_name).create_index(
     fields=schema,
-    definition=IndexDefinition(prefix=["pre"], index_type=IndexType.HASH),
+    definition=IndexDefinition(prefix=[f"{index_name}:"], index_type=IndexType.HASH),
 )
 pipeline = client.pipeline(transaction=False)
 
@@ -49,7 +49,7 @@ sentences = [
 i = 0
 for s in sentences:
     embedding = get_embedding(s)
-    pipeline.hset(f"pre:{i}", mapping={
+    pipeline.hset(f"{index_name}:{i}", mapping={
         "content": s,
         "vec": np.array(embedding, dtype=np.float32).tobytes()
     })
